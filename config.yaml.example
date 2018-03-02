@@ -1,0 +1,15 @@
+proxy:
+  secretToken: ""
+
+rbac:
+  enabled: false
+
+# singleuser:
+#   storage:
+#     extraVolumes: 
+#       - name: volume-data
+#         persistentVolumeClaim:
+#           claimName: claim-data
+#     extraVolumeMounts: 
+#       - name: volume-data
+#         mountPath: /data
