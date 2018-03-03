@@ -97,6 +97,8 @@ $ helm upgrade alpha jupyterhub/jupyterhub --version=v0.6 -f config.yaml
     kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
     ```
 - [ ] Fix the RBAC stuff
+- [ ] Load test based on DATA301 course work
+
 ## Sources:
  - https://zero-to-jupyterhub.readthedocs.io/en/latest/ 
  - https://kubernetes.io/docs/getting-started-guides/kops/
