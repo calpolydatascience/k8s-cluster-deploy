@@ -4,10 +4,15 @@
 kubectl --namespace kube-system create serviceaccount tiller
 helm init --service-account tiller
 
-# Create Services
-## Kubernetes Dashboard
+# Install Kubernetes Dashboard
 kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
-## Heapster (Resource Usage Monitoring)
+# Install Storage Class
+kubectl create -f manifest.yaml
+
+# TODO: Install Heapster (Resource Usage Monitoring)
 # https://github.com/kubernetes/heapster/tree/master/deploy/kube-config/influxdb
 # kubectl create -f [All the yaml files in above]
+
+# Create EFS Mount Targets
+# Server: fs-8e79f327.efs.us-west-2.amazonaws.com
