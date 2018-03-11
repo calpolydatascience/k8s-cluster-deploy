@@ -89,15 +89,16 @@ $ helm upgrade alpha jupyterhub/jupyterhub --version=v0.6 -f config.yaml
 
 ## To Do:  
 - [ ] Configure `GitHibOAuth` via `config.yaml`
-- [ ] Create `kops` user and policies in AWS IAM
+- [x] Create `kops` user and policies in AWS IAM
 - [ ] This: `aws s3api put-bucket-versioning --bucket prefix-example-com-state-store  --versioning-configuration Status=Enabled` 
-- [ ] AWS EFS storage BS: https://github.com/kubernetes-incubator/external-storage/tree/master/aws/efs
+- [x] AWS EFS storage BS: https://github.com/kubernetes-incubator/external-storage/tree/master/aws/efs
 - [ ] Secure Helm:
     ```
     kubectl --namespace=kube-system patch deployment tiller-deploy --type=json --patch='[{"op": "add", "path": "/spec/template/spec/containers/0/command", "value": ["/tiller", "--listen=localhost:44134"]}]'
     ```
 - [ ] Fix the RBAC stuff
 - [ ] Load test based on DATA301 course work
+- [ ] Document `pip install --user [package]`, so user can persist packages. Maybe set as the default?
 
 ## Sources:
  - https://zero-to-jupyterhub.readthedocs.io/en/latest/ 
