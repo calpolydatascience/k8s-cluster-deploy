@@ -14,14 +14,34 @@ hub:
       nfs:
         server: fs-8e79f327.efs.us-west-2.amazonaws.com 
         path: /
+  extraConfig: |
+    from z2jh import get_config
+    def is_admin(spawner):
+      admins = get_config('auth.admin.users', [])
+      if spawner.user.name in admins:
+        return 'yes'
+      else:
+        return 'no'
+    c.KubeSpawner.environment.update({
+      "GRANT_SUDO": is_admin,
+      "CHOWN_HOME": 'yes'
+    })
   # image:
   #   name: calpolydatascience/k8s-hub
   #   tag: jhd67ff
 
+auth:
+  admin:
+    users:
+      - admin
+      - dlsun
+      - townsenddw
+
 singleuser:
-  extraEnv:
-    GRANT_SUDO: 1
+  # extraEnv:
+  #   CHOWN_HOME: '1'
   uid: 0
+  fsGid: 1000
   storage:
     dynamic:
       storageClass: aws-efs
@@ -35,7 +55,7 @@ singleuser:
           server: fs-4a0396e3.efs.us-west-2.amazonaws.com 
           path: /
   image:
-    name: jupyter/scipy-notebook
-    tag: c7fb6660d096
-  # cmd: start-singleuser.sh
+    name: jupyter/base-notebook
+    tag: 29b68cd9e187
+  cmd: start-singleuser.sh
 
