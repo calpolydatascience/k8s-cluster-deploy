@@ -15,7 +15,12 @@ hub:
         server: fs-8e79f327.efs.us-west-2.amazonaws.com 
         path: /
   extraConfig: |
-    c.KubeSpawner.environment.update({"GRANT_SUDO": '1'})
+    def is_admin(spawner):
+      if spawner.user.name in c.Authenticator.admin_users:
+        return 'yes'
+      else:
+        return 'no'
+    c.KubeSpawner.environment.update({"GRANT_SUDO": is_admin})
   # image:
   #   name: calpolydatascience/k8s-hub
   #   tag: jhd67ff
