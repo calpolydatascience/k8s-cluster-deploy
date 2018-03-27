@@ -4,9 +4,9 @@ kind: ConfigMap
 metadata:
   name: efs-provisioner
 data:
-  file.system.id: fs-8e79f327
+  file.system.id: fs-35e87e9c
   aws.region: us-west-2
-  provisioner.name: example.com/aws-efs
+  provisioner.name: calpolydatascience.org/aws-efs
 ---
 kind: Deployment
 apiVersion: extensions/v1beta1
@@ -46,14 +46,14 @@ spec:
       volumes:
         - name: pv-volume
           nfs:
-            server: fs-8e79f327.efs.us-west-2.amazonaws.com 
+            server: fs-35e87e9c.efs.us-west-2.amazonaws.com 
             path: /
 ---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: aws-efs
-provisioner: example.com/aws-efs
+provisioner: calpolydatascience.org/aws-efs
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1

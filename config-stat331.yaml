@@ -1,9 +1,9 @@
 proxy:
-  secretToken: "a2fb488cd373855647d120e9f77567a431a61aa39c1a38631bc5d7ec10308179"
+  secretToken: "9b515618fa1b9838883b6f54aae2b5ce7ca3960503ea8e0e00c1e2c88001d1ea"
   https:
     type: letsencrypt
     hosts:
-      - "pasulkalab.calpolydatascience.org"
+      - "stat331.calpolydatascience.org"
     letsencrypt:
       contactEmail: "ellisonbg@gmail.com"
 
@@ -25,19 +25,11 @@ hub:
     })
 
 auth:
-  type: github
-  whitelist:
-    users:
-      - llodolo
-      - ellisonbg
-  github:
-    clientId: "7e09923449cad523f133"
-    clientSecret: "7a4e0847ed6168aaaf2da58716e31cbdeccc8473"
-    callbackUrl: "https://aaef0c3ff2ee111e8b0760200417670b-603777686.us-west-2.elb.amazonaws.com/hub/oauth_callback"
   admin:
     users:
-      - apasulka
-      - townsenddw
+      - admin
+      - dwtownse
+      - hglanz
 
 singleuser:
   uid: 0
@@ -46,15 +38,16 @@ singleuser:
       storageClass: aws-efs
     homeMountPath: '/home/jovyan'
     extraVolumeMounts:
-      - name: pv-group-pasulkalab
-        mountPath: /pasulkalab
+      - name: pv-class-stat331
+        mountPath: /stat331
     extraVolumes:
-      - name: pv-group-pasulkalab
+      - name: pv-class-stat331
         nfs:
-          server: fs-ade87e04.efs.us-west-2.amazonaws.com 
+          server: fs-fee97f57.efs.us-west-2.amazonaws.com 
           path: /
   image:
     name: calpolydatascience/rstudio-notebook
     tag: 0.1
   cmd: start-singleuser.sh
+
 
