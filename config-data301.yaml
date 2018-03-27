@@ -1,41 +1,53 @@
 proxy:
-  secretToken: "445c50e1df9bf2fcdb9f88ef56e88e6526e5af131ff5d7df3fa8a14b1a756d3a"
+  secretToken: "c58389b3f80f67e84b1fff7b49252f3ade9e7e83777969609de2145cd0522244"
+  https:
+    type: letsencrypt
+    hosts:
+      - "data301.calpolydatascience.org"
+    letsencrypt:
+      contactEmail: "ellisonbg@gmail.com"
 
 rbac:
   enabled: false
 
 hub:
-  uid: 0
-  extraVolumeMounts:
-    - name: pv-home
-      mountPath: /persistentvolumes
-  extraVolumes:
-    - name: pv-home
-      nfs:
-        server: fs-8e79f327.efs.us-west-2.amazonaws.com 
-        path: /
-  # image:
-  #   name: calpolydatascience/k8s-hub
-  #   tag: jhd67ff
+  extraConfig: |
+    from z2jh import get_config
+    def is_admin(spawner):
+      admins = get_config('auth.admin.users', [])
+      if spawner.user.name in admins:
+        return 'yes'
+      else:
+        return 'no'
+    c.KubeSpawner.environment.update({
+      "GRANT_SUDO": is_admin,
+      "CHOWN_HOME": 'yes'
+    })
+
+auth:
+  admin:
+    users:
+      - admin
+      - dlsun
+      - townsenddw
 
 singleuser:
-  extraEnv:
-    GRANT_SUDO: 1
   uid: 0
+  fsGid: 1000
   storage:
     dynamic:
       storageClass: aws-efs
     homeMountPath: '/home/jovyan'
     extraVolumeMounts:
       - name: pv-class-data301
-        mountPath: /data
+        mountPath: /data301
     extraVolumes:
       - name: pv-class-data301
         nfs:
-          server: fs-4a0396e3.efs.us-west-2.amazonaws.com 
+          server: fs-c3e97f6a.efs.us-west-2.amazonaws.com 
           path: /
   image:
-    name: jupyter/scipy-notebook
-    tag: c7fb6660d096
-  # cmd: start-singleuser.sh
+    name: calpolydatascience/data301-notebook
+    tag: latest
+  cmd: start-singleuser.sh
 
