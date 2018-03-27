@@ -33,7 +33,7 @@ auth:
   github:
     clientId: "7e09923449cad523f133"
     clientSecret: "7a4e0847ed6168aaaf2da58716e31cbdeccc8473"
-    callbackUrl: "https://aaef0c3ff2ee111e8b0760200417670b-603777686.us-west-2.elb.amazonaws.com/hub/oauth_callback"
+    callbackUrl: "https://pasulkalab.calpolydatascience.org/hub/oauth_callback"
   admin:
     users:
       - apasulka
@@ -43,7 +43,7 @@ singleuser:
   lifecycleHooks:
     postStart:
       exec:
-        command: ["/bin/sh", "-c", "test -f /home/jovyan/pasulkalab || ln -s /pasulkalab /home/jovyan/pasulkalab"]
+        command: ["/bin/sh", "-c", "test -L /home/jovyan/pasulkalab || ln -s /pasulkalab /home/jovyan/pasulkalab"]
   uid: 0
   storage:
     dynamic:
