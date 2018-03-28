@@ -33,7 +33,7 @@ auth:
   github:
     clientId: "7e09923449cad523f133"
     clientSecret: "7a4e0847ed6168aaaf2da58716e31cbdeccc8473"
-    callbackUrl: "helm upgrade <YOUR_RELEASE_NAME> jupyterhub/jupyterhub --version=v0.6 -f config.yaml"
+    callbackUrl: "https://pasulkalab.calpolydatascience.org/hub/oauth_callback"
   admin:
     users:
       - apasulka

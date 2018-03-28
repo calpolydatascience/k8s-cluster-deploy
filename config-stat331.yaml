@@ -25,13 +25,19 @@ hub:
     })
 
 auth:
+  type: github
+  whitelist:
+    users:
+      - ellisonbg
   admin:
     users:
-      - admin
-      - dwtownse
       - hglanz
-  dummy:
-    password: stat331
+      - ellisonbg
+      - townsenddw
+  github:
+    clientId: "636c22f89688a209abdf"
+    clientSecret: "2111ddf37339444f860fd831d362c8b097457449"
+    callbackUrl: "https://stat331.calpolydatascience.org/hub/oauth_callback"
 
 singleuser:
   lifecycleHooks:
