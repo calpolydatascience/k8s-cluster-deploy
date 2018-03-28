@@ -60,6 +60,12 @@ singleuser:
   image:
     name: calpolydatascience/rstudio-notebook
     tag: 0.1
+  cpu:
+    limit:
+    guarantee:
+  memory:
+    limit: 1G
+    guarantee: 512Mi
   cmd: start-singleuser.sh
 
 
