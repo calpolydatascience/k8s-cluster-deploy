@@ -68,7 +68,7 @@ singleuser:
     guarantee:
   memory:
     limit: 2G
-    guarantee: 512Mi
+    guarantee: 512M
   cmd: start-singleuser.sh
   defaultUrl: /lab
 

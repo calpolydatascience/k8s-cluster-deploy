@@ -65,6 +65,6 @@ singleuser:
     guarantee:
   memory:
     limit: 1G
-    guarantee: 512Mi
+    guarantee: 512M
   cmd: start-singleuser.sh
 
