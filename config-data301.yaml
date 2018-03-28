@@ -63,5 +63,12 @@ singleuser:
   image:
     name: calpolydatascience/data301-notebook
     tag: 0.1
+  cpu:
+    limit:
+    guarantee:
+  memory:
+    limit: 2G
+    guarantee: 512Mi
   cmd: start-singleuser.sh
+  defaultUrl: /lab
 
