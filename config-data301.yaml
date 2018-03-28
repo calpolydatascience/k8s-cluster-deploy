@@ -3,7 +3,7 @@ proxy:
   https:
     type: letsencrypt
     hosts:
-      - "data301.calpolydatascience.org"
+      - "data301-spring.calpolydatascience.org"
       - "data301b.calpolydatascience.org"
     letsencrypt:
       contactEmail: "ellisonbg@gmail.com"
@@ -26,13 +26,20 @@ hub:
     })
 
 auth:
+  type: github
+  whitelist:
+    users:
+      - data301
   admin:
     users:
-      - admin
       - dlsun
       - townsenddw
-  dummy:
-    password: data301
+      - data301
+      - ellisonbg
+  github:
+    clientId: "3c6f0494721213782ae1"
+    clientSecret: "ad15a334e20a135b05e3956bd6f01c039bd81734"
+    callbackUrl: "https://data301-spring.calpolydatascience.org/hub/oauth_callback"
 
 singleuser:
   lifecycleHooks:
