@@ -33,13 +33,17 @@ auth:
   github:
     clientId: "7e09923449cad523f133"
     clientSecret: "7a4e0847ed6168aaaf2da58716e31cbdeccc8473"
-    callbackUrl: "https://aaef0c3ff2ee111e8b0760200417670b-603777686.us-west-2.elb.amazonaws.com/hub/oauth_callback"
+    callbackUrl: "helm upgrade <YOUR_RELEASE_NAME> jupyterhub/jupyterhub --version=v0.6 -f config.yaml"
   admin:
     users:
       - apasulka
       - townsenddw
 
 singleuser:
+  lifecycleHooks:
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "test -L /home/jovyan/pasulkalab || ln -s /pasulkalab /home/jovyan/pasulkalab"]
   uid: 0
   storage:
     dynamic:
