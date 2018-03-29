@@ -7,12 +7,12 @@
 $ brew update && brew install kops
 
 # Create S3 bucket to store config
-$ aws s3 mb s3://clusters.k8s.thedwightway.com
+$ aws s3 mb s3://clusters.k8s.calpolydatascience.org
 
 # Set NAME and KOPS_STATE_STORE
 # Public was: k8s.thedwightway.com
-$ export NAME=alpha.k8s.local
-$ export KOPS_STATE_STORE=s3://clusters.k8s.thedwightway.com
+$ export NAME=calpolydatascience.k8s.local
+$ export KOPS_STATE_STORE=s3://clusters.k8s.calpolydatascience.org
 ```
  
 ## Create Cluster
