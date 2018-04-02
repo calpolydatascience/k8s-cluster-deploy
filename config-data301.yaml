@@ -72,3 +72,6 @@ singleuser:
   cmd: start-singleuser.sh
   defaultUrl: /lab
 
+prePuller:
+  continuous:
+    enabled: true

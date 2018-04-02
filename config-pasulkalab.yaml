@@ -68,3 +68,6 @@ singleuser:
     guarantee: 512M
   cmd: start-singleuser.sh
 
+prePuller:
+  continuous:
+    enabled: true
