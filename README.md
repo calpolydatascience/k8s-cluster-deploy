@@ -88,7 +88,7 @@ $ helm upgrade alpha jupyterhub/jupyterhub --version=v0.6 -f config.yaml
 ```
 
 ## To Do:  
-- [ ] Configure `GitHibOAuth` via `config.yaml`
+- [x] Configure `GitHibOAuth` via `config.yaml`
 - [x] Create `kops` user and policies in AWS IAM
 - [ ] This: `aws s3api put-bucket-versioning --bucket prefix-example-com-state-store  --versioning-configuration Status=Enabled` 
 - [x] AWS EFS storage BS: https://github.com/kubernetes-incubator/external-storage/tree/master/aws/efs
