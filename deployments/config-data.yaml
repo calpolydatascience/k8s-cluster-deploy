@@ -1,0 +1,67 @@
+proxy:
+  secretToken: "310e0dfddcef0faf4c9128a08d65fddd5e701c6f564e12a4bd030231f096ca94"
+  https:
+    type: letsencrypt
+    hosts:
+      - "data.calpolydatascience.org"
+    letsencrypt:
+      contactEmail: "ellisonbg@gmail.com"
+
+rbac:
+  enabled: false
+
+hub:
+  extraConfig: |
+    from z2jh import get_config
+    def is_admin(spawner):
+      admins = get_config('auth.admin.users', [])
+      if spawner.user.name in admins:
+        return 'yes'
+      else:
+        return 'no'
+    c.KubeSpawner.environment.update({
+      "GRANT_SUDO": is_admin,
+      "CHOWN_HOME": 'yes'
+    })
+
+auth:
+  type: github
+  whitelist:
+    users:
+      - data301
+  admin:
+    users:
+      - dekhtyar
+      - dlsun
+      - townsenddw
+      - foadd
+      - data301
+      - ellisonbg
+      - lubomir93
+      - mikehalverson11
+  github:
+    clientId: "9cdfe8283822f577051d"
+    clientSecret: "3c1cde8fc2be5da40aaa97cd0ff6f20cf315101d"
+    callbackUrl: "https://data.calpolydatascience.org/hub/oauth_callback"
+
+singleuser:
+  uid: 0
+  fsGid: 1000
+  storage:
+    dynamic:
+      storageClass: aws-efs
+    homeMountPath: '/home/jovyan'
+  image:
+    name: calpolydatascience/datascience-notebook
+    tag: 0.1
+  cpu:
+    limit:
+    guarantee:
+  memory:
+    limit: 2G
+    guarantee: 512M
+  cmd: start-singleuser.sh
+
+prePuller:
+  continuous:
+    enabled: true

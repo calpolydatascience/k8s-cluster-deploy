@@ -1,0 +1,77 @@
+proxy:
+  secretToken: "f3174bd562a6e66eb0ab15bedb4e8f21c789e5d9e11f58da7fe6368f68b262ae"
+  https:
+    type: letsencrypt
+    hosts:
+      - "seismonerds.calpolydatascience.org"
+    letsencrypt:
+      contactEmail: "ellisonbg@gmail.com"
+
+rbac:
+  enabled: false
+
+hub:
+  extraConfig: |
+    from z2jh import get_config
+    def is_admin(spawner):
+      admins = get_config('auth.admin.users', [])
+      if spawner.user.name in admins:
+        return 'yes'
+      else:
+        return 'no'
+    c.KubeSpawner.environment.update({
+      "GRANT_SUDO": is_admin,
+      "CHOWN_HOME": 'yes'
+    })
+
+auth:
+  type: google
+  whitelist:
+    users:
+      - fords2015
+      - townsenddw
+  admin:
+    users:
+      - jjj.cpslo
+      - townsenddw
+      - ellisonbg
+  google:
+    clientId: "102554544946-s14e3ui2ddc7ohn9lfoq7qp7enhper71.apps.googleusercontent.com"
+    clientSecret: "dYnDW-KP0mCNV9mf0fI6HGHa"
+    callbackUrl: "https://seismonerds.calpolydatascience.org/hub/oauth_callback"
+    hostedDomain: "calpolydatascience.org"
+    loginService: "Calpoly Data Science"
+
+singleuser:
+  lifecycleHooks:
+    postStart:
+      exec:
+        command: ["/bin/sh", "-c", "test -L /home/jovyan/seismonerds || ln -s /seismonerds /home/jovyan/seismonerds"]
+  uid: 0
+  fsGid: 1000
+  storage:
+    dynamic:
+      storageClass: aws-efs
+    homeMountPath: '/home/jovyan'
+    extraVolumeMounts:
+      - name: pv-group-seismonerds
+        mountPath: /seismonerds
+    extraVolumes:
+      - name: pv-group-seismonerds
+        nfs:
+          server: fs-be53cf17.efs.us-west-2.amazonaws.com 
+          path: /
+  image:
+    name: jupyter/datascience-notebook
+    tag: 9f9e5ca8fe5a
+  cpu:
+    limit:
+    guarantee:
+  memory:
+    limit: 2G
+    guarantee: 512M
+  cmd: start-singleuser.sh
+
+prePuller:
+  continuous:
+    enabled: true
