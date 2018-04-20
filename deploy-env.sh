@@ -7,7 +7,7 @@ helm install jupyterhub/jupyterhub \
   --version=v0.6 \
   --name=$1 \
   --namespace=$1 \
-  -f config-$1.yaml
+  -f deployments/config-$1.yaml
 
 # TODO: Set Up Automatic DNS provisioning to loadbalancer
 # $ kubectl -n test describe svc proxy-public | grep "LoadBalancer Ingress" | cut -d " " -f 7-
