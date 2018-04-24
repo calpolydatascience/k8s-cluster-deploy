@@ -3,7 +3,7 @@ proxy:
   https:
     type: letsencrypt
     hosts:
-      - "data.calpolydatascience.org"
+      - "data400.calpolydatascience.org"
     letsencrypt:
       contactEmail: "ellisonbg@gmail.com"
 
@@ -42,7 +42,7 @@ auth:
   github:
     clientId: "9cdfe8283822f577051d"
     clientSecret: "3c1cde8fc2be5da40aaa97cd0ff6f20cf315101d"
-    callbackUrl: "https://data.calpolydatascience.org/hub/oauth_callback"
+    callbackUrl: "https://data400.calpolydatascience.org/hub/oauth_callback"
 
 singleuser:
   uid: 0

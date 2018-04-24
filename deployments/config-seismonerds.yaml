@@ -23,24 +23,25 @@ hub:
       "GRANT_SUDO": is_admin,
       "CHOWN_HOME": 'yes'
     })
+    c.GoogleOAuthenticator.hosted_domain = ''
 
 auth:
   type: google
   whitelist:
     users:
-      - fords2015
-      - townsenddw
+      - fords2015@gmail.com
+      - townsenddw@gmail.com
   admin:
     users:
-      - jjj.cpslo
-      - townsenddw
-      - ellisonbg
+      - jjj.cpslo@gmail.com
+      - townsenddw@gmail.com
+      - ellisonbg@gmail.com
   google:
     clientId: "102554544946-s14e3ui2ddc7ohn9lfoq7qp7enhper71.apps.googleusercontent.com"
     clientSecret: "dYnDW-KP0mCNV9mf0fI6HGHa"
     callbackUrl: "https://seismonerds.calpolydatascience.org/hub/oauth_callback"
-    hostedDomain: "calpolydatascience.org"
-    loginService: "Calpoly Data Science"
+    hostedDomain: Unicode('')
+    loginService: "Google"
 
 singleuser:
   lifecycleHooks:
