@@ -105,4 +105,4 @@ out/
 
 # secret configs
 config.yaml
-./keys/
+/keys
