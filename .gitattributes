@@ -1,1 +1,2 @@
 deployments/** filter=git-crypt diff=git-crypt
+manifest.yaml filter=git-crypt diff=git-crypt
